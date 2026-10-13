@@ -76,9 +76,7 @@ test('saved highlights survive reads, edits, deletion, and simultaneous writes',
   assert.equal(updated.data.find(row => row.id === first.data.id).color, 'sky');
   const noNote = await send({ type: 'update', url, id: second.data.id, note: '', color: 'mint' });
   assert.equal(noNote.data.find(row => row.id === second.data.id).note, '');
-  assert.equal(noNote.data.find(row => row.id === second.data.id).highlighted, true);
-  const removedHighlight = await send({ type: 'update', url, id: first.data.id,
-    note: 'Keep this note', color: 'peach', highlighted: false });
+  const removedHighlight = await send({ type: 'delete', url, id: first.data.id });
   assert.equal(removedHighlight.data.some(row => row.id === first.data.id), false);
   assert.equal((await send({ type: 'add', url, item: { ...item, color: 'invalid' } })).ok, false);
   const box = { selector: 'body > h1:nth-of-type(1)', tag: 'h1', text: 'Article heading',
@@ -113,10 +111,10 @@ test('saved highlights survive reads, edits, deletion, and simultaneous writes',
   assert.equal((await send({ type: 'list', url })).data.length, 0);
   const legacyUrl = 'https://example.com/old-page';
   values.set(`focusink:${legacyUrl}`, [{ id: 'old', ...item, highlighted: false, createdAt: 1 }]);
-  assert.equal((await send({ type: 'list', url: legacyUrl })).data[0].highlighted, true);
+  assert.equal((await send({ type: 'list', url: legacyUrl })).data[0].id, 'old');
   const migrated = await send({ type: 'update', url: legacyUrl, id: 'old',
     note: 'Updated old note', color: 'rose' });
-  assert.equal(migrated.data[0].highlighted, true);
+  assert.equal(migrated.data[0].note, 'Updated old note');
   const otherPage = 'https://other.example/page';
   values.set('focusink:http://example.com/another', [{ id: 'second-old', ...item }]);
   values.set(`focusink:${otherPage}`, [{ id: 'other', ...item }]);

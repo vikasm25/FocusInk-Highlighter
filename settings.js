@@ -16,7 +16,7 @@
     return settings;
   }
 
-  const api = { key, colors, defaults, normalize };
+  const api = { key, colors, normalize };
   root.FocusInkSettings = api;
   if (typeof module !== 'undefined') module.exports = api;
 })(globalThis);

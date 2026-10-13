@@ -106,8 +106,9 @@ function render() {
       } catch (error) { status(error.message, true); remove.disabled = false; }
     });
     actions.append(save, jump, remove);
-    const split = element('div', 'split-actions');
+    editor.append(label, color, actions);
     if (item.note) {
+      const split = element('div', 'split-actions');
       const removeNote = element('button', '', 'Remove note');
       removeNote.type = 'button';
       removeNote.addEventListener('click', async () => {
@@ -118,8 +119,8 @@ function render() {
         } catch (error) { status(error.message, true); removeNote.disabled = false; }
       });
       split.append(removeNote);
+      editor.append(split);
     }
-    editor.append(label, color, actions, split);
     card.append(editor);
     list.append(card);
   }

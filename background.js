@@ -24,7 +24,7 @@ async function handle(message) {
       (item.kind !== 'box' || (item.box && typeof item.box.selector === 'string')))
     : [];
 
-  if (message.type === 'list') return records.map(item => ({ ...item, highlighted: true }));
+  if (message.type === 'list') return records;
 
   if (message.type === 'add') {
     const item = message.item;
@@ -47,7 +47,7 @@ async function handle(message) {
       prefix: String(item.prefix || '').slice(-80), suffix: String(item.suffix || '').slice(0, 80),
       box: isBox ? { selector: box.selector, tag: box.tag, text: String(box.text || '').slice(0, 160),
         x: box.x, y: box.y, w: box.w, h: box.h } : undefined,
-      color: item.color, note: item.note, highlighted: true,
+      color: item.color, note: item.note,
       createdAt: Date.now()
     };
     records.unshift(saved);
@@ -67,13 +67,10 @@ async function handle(message) {
   const index = records.findIndex(item => item.id === message.id);
   if (index < 0) throw new Error('Highlight not found. Refresh and try again.');
   if (message.type === 'update') {
-    if (typeof message.note !== 'string' || message.note.length > 2000 || !colors.has(message.color) ||
-        (message.highlighted !== undefined && typeof message.highlighted !== 'boolean')) {
+    if (typeof message.note !== 'string' || message.note.length > 2000 || !colors.has(message.color)) {
       throw new Error('Choose a color and keep the note under 2,000 characters.');
     }
-    if (message.highlighted === false) records.splice(index, 1);
-    else records[index] = { ...records[index], color: message.color, note: message.note,
-      highlighted: true };
+    records[index] = { ...records[index], color: message.color, note: message.note };
   } else if (message.type === 'delete') {
     records.splice(index, 1);
   } else {
