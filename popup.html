@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FocusInk</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="anchor.js" defer></script>
+  <script src="settings.js" defer></script>
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="brand-row"><span class="brand-icon" aria-hidden="true">✦</span><div><strong>FocusInk</strong><small>MAKE READING STICK</small></div><span class="version">v1.4.0</span></div>
+      <span class="hero-eyebrow">YOUR READING COMPANION</span>
+      <h1>Keep the<br><em>good bits.</em></h1>
+      <p>Highlight a thought, draw around a detail, and find it when you return.</p>
+      <div class="page-pill"><span class="page-dot" aria-hidden="true"></span><span id="page-name">Checking this page…</span></div>
+    </header>
+    <section class="content">
+      <div class="draw-row"><button id="draw-box" type="button">▢ &nbsp; Draw on this page</button><select id="box-color" aria-label="Box color"></select></div>
+      <p class="draw-help">Drag to make boxes. Choose Done on the page or press Esc.</p>
+      <button id="open-library" class="library-link" type="button"><span>Open your library <small>Websites, annotations & settings</small></span><span aria-hidden="true">↗</span></button>
+      <div class="section-heading"><div><span class="eyebrow">THIS WEBSITE</span><h2>Saved on this page <span id="count">0</span></h2></div><span class="decor" aria-hidden="true">✳</span></div>
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search highlights, boxes and notes" autocomplete="off" aria-label="Search highlights, boxes and notes"></label>
+      <p id="status" class="status" role="status" hidden></p>
+      <div id="list" class="list"></div>
+      <div id="empty" class="empty"><span class="empty-icon" aria-hidden="true">✦</span><h3>Nothing saved yet</h3><p>Select text to highlight it, add a note, or choose Box to draw around content.</p></div>
+    </section>
+    <footer><span>Created by Vikas Kumar Meena</span><span>Saved privately in this browser</span></footer>
+  </main>
+</body>
+</html>
