@@ -1,8 +1,6 @@
 # FocusInk
 
-A blue-themed Chrome extension for highlighting text, drawing boxes around webpage content, and attaching notes. Saved annotations return after a refresh or browser restart.
-
-Created by **Vikas Kumar Meena**.
+A Simple Chrome extension for highlighting text, drawing boxes around webpage content, and attaching notes. Saved annotations return after a refresh or browser restart.
 
 ## Install
 
@@ -40,7 +38,3 @@ Choose a 4- or 8-color quick palette and a default color. You can also show or h
 FocusInk stores highlights, boxes, notes, and settings locally in Chrome extension storage. Nothing is uploaded or synced. Page URLs are saved without their `#fragment`.
 
 An annotation reappears when FocusInk can find its original text or box target. If a website changes its content or layout, or places content inside a closed shadow root or embedded frame, the annotation may not reappear on the page. Its saved entry remains in the library. Chrome internal pages and PDF viewer pages are not supported.
-
-## Check
-
-Run `node --test tests/*.test.js` to check storage, library deletion, and text matching. There is no build step or third-party runtime dependency.
